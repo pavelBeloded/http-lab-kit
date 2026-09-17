@@ -1,0 +1,13 @@
+{
+  "name": "http-lab-kit",
+  "version": "1.0.0",
+  "description": "HTTP utils for university boilerplate code ",
+  "license": "MIT",
+  "author": "ddedmorozzz beloded_2007@bk.ru",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
