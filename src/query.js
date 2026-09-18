@@ -41,3 +41,19 @@ export function parseParams(url, schema) {
 
   return result;
 }
+
+export const readJsonBody = (req) => {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', (chunk) => chunks.push(chunk));
+    req.on('end', () => {
+      try {
+        const raw = Buffer.concat(chunks).toString();
+        resolve(raw ? JSON.parse(raw) : {});
+      } catch (err) {
+        reject(new Error("Invalid JSON format"));
+      }
+    });
+    req.on('error', (err) => reject(err));
+  });
+};
