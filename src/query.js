@@ -57,3 +57,20 @@ export const readJsonBody = (req) => {
     req.on('error', (err) => reject(err));
   });
 };
+
+
+export const readBody = (req, parse = (str) => str) => {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', (chunk) => chunks.push(chunk));
+    req.on('error', reject);
+    req.on('end', () => {
+      try {
+        const raw = Buffer.concat(chunks).toString('utf-8');
+        resolve(raw.length ? parse(raw) : undefined);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  });
+};
